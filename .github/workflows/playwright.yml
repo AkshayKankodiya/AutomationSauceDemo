@@ -31,7 +31,7 @@ jobs:
 
       # 5️⃣ Run tests
       - name: Run Playwright tests
-        run: npx playwright test SauceTest.spec.ts
+        run: npx playwright test
 
       # 6️⃣ Upload HTML report
       - name: Upload Playwright Report
