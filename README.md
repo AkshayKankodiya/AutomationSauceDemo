@@ -2,10 +2,10 @@
 
 This repository contains a **Playwright-based test automation framework** for [SauceDemo](https://www.saucedemo.com/) to demonstrate:
 
-✅ Authentication flows (login, invalid credentials, locked users)
-✅ E-commerce flows (add to cart, checkout, remove items)
-✅ Product sorting & filtering
-✅ API Mocking Tests
+* **✅ Authentication flows (login, invalid credentials, locked users)
+* **✅ E-commerce flows (add to cart, checkout, remove items)
+* **✅ Product sorting & filtering
+* **✅ API Mocking Tests
 
 ---
 
