@@ -1,0 +1,19 @@
+{
+  "name": "automationprac",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1",
+    "@types/pdf-parse": "^1.1.5"
+  },
+  "dependencies": {
+    "pdf-parse": "^2.4.5"
+  }
+}
