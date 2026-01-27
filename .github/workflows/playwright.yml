@@ -30,8 +30,8 @@ jobs:
         run: npx playwright install --with-deps
 
       # 5️⃣ Run tests
-      - name: Run Playwright tests
-        run: npx playwright test SauceTest.spec.ts
+      - name: Run Playwright tests All Run
+        run: npx playwright test 
 
       # 6️⃣ Upload HTML report
       - name: Upload Playwright Report
