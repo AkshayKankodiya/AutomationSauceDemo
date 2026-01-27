@@ -1,14 +1,9 @@
 import { test, expect } from '../../Fixture/fixtures';
-import { DashboardPage } from '../../pages/DasboardPage'; 
 import { LoginPage } from '../../pages/LoginPage';
-import { InventoryPage } from '../../pages/inventory.page';
-let dashboardPage: DashboardPage;
+import { credentials } from '../../config/credentials';
 let loginTestPage: LoginPage;
-let inventoryPage: InventoryPage;
 test.beforeAll(async ({ sharedPage, loginPageFixture }) => {
-  dashboardPage = new DashboardPage(sharedPage);
   loginTestPage = new LoginPage(sharedPage);
-  inventoryPage = new InventoryPage(sharedPage);
 });
 
 test.describe('Automation Authentication Test SauceDemo', () => {
@@ -23,7 +18,7 @@ test.describe('Automation Authentication Test SauceDemo', () => {
     console.log('➡️ Scenario 2: Locked User Login');
     await loginTestPage.assertOnLoginWithLockedUser();
     console.log('➡️ Scenario 3: Valid User Login');
-    await loginTestPage.assertOnLoginPage();
+    await loginTestPage.assertOnLoginPage(credentials.username, credentials.password);
     console.log('➡️ Scenario 4: Session Persistence Validation');
     await loginTestPage.sessionPersistenceValidation();
     console.log('\n====================================================');

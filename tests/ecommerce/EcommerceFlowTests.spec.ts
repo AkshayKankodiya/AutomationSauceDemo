@@ -1,12 +1,13 @@
 import { test, expect } from '../../Fixture/fixtures';
-import { DashboardPage } from '../../pages/DasboardPage'; 
+import { DashboardPage } from '../../pages/DasboardPage';
 import { LoginPage } from '../../pages/LoginPage';
+import { credentials } from '../../config/credentials';
 let dashboardPage: DashboardPage;
 let loginTestPage: LoginPage;
 test.beforeAll(async ({ sharedPage, loginPageFixture }) => {
   dashboardPage = new DashboardPage(sharedPage);
   loginTestPage = new LoginPage(sharedPage);
-  await loginTestPage.assertOnLoginPage();
+  await loginTestPage.assertOnLoginPage(credentials.username, credentials.password);
 });
 
 test.describe('Automation E-commerce Flow Test SauceDemo', () => {

@@ -1,5 +1,5 @@
 // ../Fixture/fixtures.ts
-import { test as base, expect, BrowserContext, Page } from '@playwright/test';
+import {test as base,expect,Browser,BrowserContext,Page,} from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
 // ---------- Worker-scoped fixtures ----------
@@ -15,36 +15,38 @@ type TestFixtures = {
 
 export const test = base.extend<TestFixtures, WorkerFixtures>({
   // ---------- Per-test LoginPage fixture ----------
-  loginPageFixture: async ({ sharedPage }, use) => {
+  loginPageFixture: async ({ sharedPage }: { sharedPage: Page },
+    use: (loginPage: LoginPage) => Promise<void>
+  ) => {
     const loginPage = new LoginPage(sharedPage);
     await loginPage.navigationGoto();
     await use(loginPage);
-
   },
 
   // ---------- Worker-scoped BrowserContext ----------
   sharedContext: [
-    async ({ browser }: any, use: (arg0: any) => any) => {
+    async (
+      { browser }: { browser: Browser },
+      use: (context: BrowserContext) => Promise<void>
+    ) => {
       const context = await browser.newContext();
       await use(context);
       await context.close();
     },
-    {
-      scope: 'worker',
-    },
-  ] as any, // 👈 avoid the WorkerFixtureValue type headache
+    { scope: 'worker' },
+  ],
 
-  // ---------- One Page per worker (same tab, no extra tabs per test) ----------
+  // ---------- One Page per worker ----------
   sharedPage: [
-    async ({ sharedContext }: any, use: (arg0: any) => any) => {
+    async (
+      { sharedContext }: { sharedContext: BrowserContext },
+      use: (page: Page) => Promise<void>
+    ) => {
       const page = await sharedContext.newPage();
       await use(page);
-      // optional: await page.close(); // usually not needed; context.close() will handle it
     },
-    {
-      scope: 'worker',
-    },
-  ] as any,
+    { scope: 'worker' },
+  ],
 });
 
 export { expect };

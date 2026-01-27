@@ -1,29 +1,29 @@
 import { Page, Locator, expect } from '@playwright/test';
-import LocatorsPage from './Locators';
+import InventoryLocatorsPage from './../Locators/InventoryPageLocators';
 
 export class InventoryPage {
   private readonly page: Page;
-  private locatorsPage: LocatorsPage;
+  private InventoryLocatorsPage: InventoryLocatorsPage;
   productTitle: string | undefined;
 
   constructor(page: Page) {
     this.page = page;
-    this.locatorsPage = new LocatorsPage(page);
+    this.InventoryLocatorsPage = new InventoryLocatorsPage(page);
   }
 
   // ✅ Wait until inventory page is fully ready
   async waitForPageReady() {
     console.log('⏳ Waiting for Inventory page...');
     await this.page.waitForURL('**/inventory.html');
-    await expect(this.locatorsPage.sortDropdown).toBeVisible();
-    await expect(this.locatorsPage.productNames.first()).toBeVisible();
+    await expect(this.InventoryLocatorsPage.sortDropdown).toBeVisible();
+    await expect(this.InventoryLocatorsPage.productNames.first()).toBeVisible();
     console.log('✅ Inventory page ready');
   }
 
   // 🔃 Generic sort selector
   async selectSort(option: 'az' | 'za' | 'lohi' | 'hilo') {
     console.log(`🔃 Selecting sort option: ${option}`);
-    await this.locatorsPage.sortDropdown.selectOption(option);
+    await this.InventoryLocatorsPage.sortDropdown.selectOption(option);
     await this.page.waitForLoadState('networkidle');
   }
 
@@ -60,7 +60,7 @@ export class InventoryPage {
 
     await this.selectSort(order === 'asc' ? 'az' : 'za');
 
-    const uiNames = await this.locatorsPage.productNames.allInnerTexts();
+    const uiNames = await this.InventoryLocatorsPage.productNames.allInnerTexts();
     console.log('📦 UI Names:', uiNames);
 
     const expected = this.sortStrings(uiNames, order);
@@ -76,7 +76,7 @@ export class InventoryPage {
 
     await this.selectSort(order === 'asc' ? 'lohi' : 'hilo');
 
-    const uiPricesText = await this.locatorsPage.productPrices.allInnerTexts();
+    const uiPricesText = await this.InventoryLocatorsPage.productPrices.allInnerTexts();
     const uiPrices = uiPricesText.map(p => Number(p.replace('$', '')));
     console.log('💰 UI Prices:', uiPrices);
 

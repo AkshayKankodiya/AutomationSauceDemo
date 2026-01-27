@@ -2,6 +2,7 @@ import { test, expect } from '../../Fixture/fixtures';
 import { DashboardPage } from '../../pages/DasboardPage'; // make sure file/class name matches
 import { LoginPage } from '../../pages/LoginPage';
 import { InventoryPage } from '../../pages/inventory.page';
+import { credentials } from '../../config/credentials';
 let dashboardPage: DashboardPage;
 let loginTestPage: LoginPage;
 let inventoryPage: InventoryPage;
@@ -9,7 +10,7 @@ test.beforeAll(async ({ sharedPage, loginPageFixture }) => {
   dashboardPage = new DashboardPage(sharedPage);
   loginTestPage = new LoginPage(sharedPage);
   inventoryPage = new InventoryPage(sharedPage);
-  await loginTestPage.assertOnLoginPage();
+  await loginTestPage.assertOnLoginPage(credentials.username, credentials.password);
 });
 
 test.describe('Automation product sorting functionality Test SauceDemo', () => {
