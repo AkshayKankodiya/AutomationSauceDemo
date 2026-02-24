@@ -22,7 +22,7 @@ export default defineConfig({
 
     video: 'on',          // 🎥 every test, always
     screenshot: 'on',
-    headless: true, // ← this is the key
+    headless: false, // ← this is the key
 
   },
   /* Configure projects for major browsers */
